@@ -1,30 +1,18 @@
 pipeline {
     agent any
 
+    tools{
+        maven "MAVEN_HOME"
+    }
     stages {
         stage('Build Application') {
             steps {
                 echo 'Building'
-                withmaven(maven : 'maven_3_8_3'){
-                    sh 'mvn clean compile'
-                }
+                
+                git 'https://github.com/ashishyadav03/demo.git'
+                
+                 bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
-        }
-        stage('Test Application') {
-            steps {
-                echo 'Testing'
-                withmaven(maven : 'maven_3_8_3'){
-                    sh 'mvn test'
-                }
-            }
-        }
-        stage('Deploy Application') {
-            steps {
-                echo 'Deploying'
-                withmaven(maven : 'maven_3_8_3'){
-                    sh 'mvn deploy'
-                }
-            }
-        }
+        }   
     }
 }
