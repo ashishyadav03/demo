@@ -7,7 +7,7 @@ pipeline {
             steps {
                 echo 'Building'
                  withmaven(maven : 'maven_3_8_3'){
-                    sh 'mvn clean compile'
+                    bat 'mvn clean compile'
                 }
                 
             }
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo 'Testing'
                 withmaven(maven : 'maven_3_8_3'){
-                    sh 'mvn test'
+                    bat 'mvn test'
                 }
             }
         }
@@ -25,7 +25,7 @@ stage('Deploy Application') {
             steps {
                 echo 'Deploying'
                 withmaven(maven : 'maven_3_8_3'){
-                    sh 'mvn deploy'
+                    bat 'mvn deploy'
                 }
             }
         }
